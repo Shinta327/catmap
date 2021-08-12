@@ -1,0 +1,6 @@
+# Use only ascii symbols in comments.(日本語でのコメントアウトを可能にする)
+AsciiComments:
+ Enabled: false
+
+Style/FrozenStringLiteralComment:
+ Enabled: false
