@@ -1,24 +1,46 @@
-# README
+# <猫マップ>
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## サイト概要
+<社会問題として取り沙汰されることの多くなった野良猫問題、近年では野良猫問題の解決策としてTRP(野良猫に不妊去勢手術を施し元の場所に返すこと)の実施、地域猫活動が行われています。
+  その活動がスムーズに行えるよう、近所の野良猫問題を解決したい方と解決できる保護団体が利用できるアプリケーションがあればいいと考えこのアプリケーションを作成しました。
+  アプリケーションの機能として、どこでどのような問題があるのかをわかりやすくするためにgooglemapAPIを用いて投稿一覧とともに地図が見れるようにしました。サイドバーの検索では地名の検索、選択ボックスにより対応段階の絞り込み、自分の投稿一覧がみれるなど、1画面で動作ができるかぎり完結するようにしています。
+  一つの投稿に対して一つの団体が対応できるようになっており、対応できる団体は投稿詳細画面の対応するボタンを押し、以降、その問題の対処にあたることになります。対応中の投稿は他の保護団体が対応することはできません。対応中の保護団体が対応不可と判断した場合、対応段階の対応中を未対応に戻せます。以降は他の保護団体が再度対応に当たることができます。
+  対応の連絡は投稿詳細画面のコメント機能を用いて行えます。コメントの内容は対応中の保護団体と投稿者のみが閲覧できます。また、ヘッダーに通知欄を設けコメントの未読がわかりやすいようにしています。
+  保護団体一覧も設けており、保護団体をクリックすると左のサイドバー内の投稿が、その団体の対応中または対応完了の投稿一覧になります。サイドバーの検索窓に文字を打ち込むと住所または団体名でヒットするようになっています。
+  全体を通し、一つの画面ないで作業が完結するよう、また、直感で使用してもらえるようなアプリケーションを意識しています。>
 
-Things you may want to cover:
+### サイトテーマ
+<地域猫活動の一助となるようなアプリケーションをテーマとしています。>
 
-* Ruby version
+### テーマを選んだ理由
+<私の家には猫が４匹おり、うち３匹は保護団体から譲渡された子達です。野良猫問題は私にとってとても身近にあります。  ともに地域社会に属する生物として共生していけるよう、少しでも力になれたらと考えこのテーマを選びました。>
 
-* System dependencies
+### ターゲットユーザ
+<野良猫問題を抱える地域住民の方や保護したいが手段がない方、及び保護団体>
 
-* Configuration
+### 主な利用シーン
+<地域住民が野良猫問題を解決したいと考えた時や、地域の保護団体が各々の対応している地区の問題を把握する際に使用していただければと考えております。>
 
-* Database creation
+## 設計書
+<https://docs.google.com/presentation/d/1Kz1fSsudTUZfnPYKe0Q2FGhk2zuD0Y9LjVF4PUgoYwg/edit?usp=sharing>
 
-* Database initialization
+## チャレンジ要素一覧
+<https://docs.google.com/spreadsheets/d/1tkVUWjdKiJDUT0gfII_dA_L4TmLz_hq1jHEbvxI_gUM/edit?usp=sharing>
 
-* How to run the test suite
+## 開発環境
+- OS：Linux(CentOS)
+- 言語：HTML,CSS,JavaScript,Ruby,SQL
+- フレームワーク：Ruby on Rails
+- JSライブラリ：jQuery
+- IDE：Cloud9
+- テンプレートエンジン : hamlit
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## 使用素材
+- googlemap GeocodingAPI
+- devise(gem)(https://github.com/heartcombo/devise)
+- rails-i18n
+- bootstrap
+- refile
+- refile_mini-magick
+- 外部サービスの画像素材・音声素材を使用した場合は、必ずサービス名とURLを明記してください。
+- 使用しない場合は、使用素材の項目をREADMEから削除してください。
