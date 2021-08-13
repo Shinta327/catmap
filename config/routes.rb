@@ -24,11 +24,11 @@ Rails.application.routes.draw do
   end
 
   # 対応機能のためのルーティング
-  resources :handles, only: %i[edit update]
+  resources :handles, only: [:edit, :update]
   patch 'handles/:id/failed' => 'handles#failed', as: 'handle_failed'
 
   # 通知機能ためのルーティング
-  resource :notices, only: [:index]
+  resources :notices, only: [:index]
 
   # 検索のためのルーティング
   get '/searchs/cats' => 'searchs#cats', as: 'search_cats'
