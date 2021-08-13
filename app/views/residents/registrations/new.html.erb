@@ -1,23 +1,35 @@
 <h2>Sign up</h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "residents/shared/error_messages", resource: resource %>
+<%= form_with model: @resident, url: resident_registration_path, id: 'new_resident', class: 'new_resident', local: true do |f| %>
+  <%= render "groups/shared/error_messages", resource: resource %>
 
   <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= f.label :name, '名前' %></br>
+    <%= f.text_field :name, autofocus: true %>
   </div>
 
   <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
+    <%= f.label :email, 'メールアドレス' %><br />
+    <%= f.email_field :email, autocomplete: "email" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :postal_code, '郵便番号（ハイフンなし）' %></br>
+    <%= f.text_field :postal_code %>
+  </div>
+
+  <div class="field">
+    <%= f.label :address, '住所' %></br>
+    <%= f.text_area :address %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password, 'パスワード（半角英数字６文字以上）' %></br>
     <%= f.password_field :password, autocomplete: "new-password" %>
   </div>
 
   <div class="field">
-    <%= f.label :password_confirmation %><br />
+    <%= f.label :password_confirmation, 'パスワード（確認用）' %><br />
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
 
@@ -26,4 +38,6 @@
   </div>
 <% end %>
 
-<%= render "residents/shared/links" %>
+<div>保護団体の方は<%= link_to 'こちら', new_group_registration_path %>から登録をお願いいたします。</div>
+<% render "groups/shared/links" %>
+

@@ -16,6 +16,15 @@
   </head>
 
   <body>
+    <header>
+      <% if resident_signed_in? %>
+        <%= render "layouts/header/resident" %>
+      <% elsif group_signed_in? %>
+        <%= render "layouts/header/group" %>
+      <% else %>
+        <%= render "layouts/header/before" %>
+      <% end %>
+    </header>
     <%= yield %>
   </body>
 </html>
