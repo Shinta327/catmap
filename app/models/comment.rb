@@ -4,8 +4,8 @@ class Comment < ApplicationRecord
     validates :cat_id
     validates :comment,     length: { maximum: 500 }
      # 条件分岐によるバリデーション（コメントが保護団体か住民かを分けるためのバリデーション）
-    validates :resident_id, unless: group_id?
-    validates :group_id,    unless: resident_id?
+    validates :resident_id, if: Proc.new { |a| a.group_id.blank? }
+    validates :group_id,    if: Proc.new { |a| a.resident_id.blank? }
   end
 
 end
