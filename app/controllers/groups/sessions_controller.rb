@@ -1,6 +1,19 @@
 # frozen_string_literal: true
 
 class Groups::SessionsController < Devise::SessionsController
+
+  # 大会後の保護団体ユーザーのログイン制限
+  before_action :reject_inactive_group, only: [:create]
+
+  # 退会済みユーザーを判別しredirectを設定
+  def reject_inactive_group
+    @group = Group.find_by(email: params[:group][:email])
+    if @group
+      if @group.valid_password?(params[:group][:password]) && @group.withdrawal
+        redirect_to new_group_session_path
+      end
+    end
+  end
   # before_action :configure_sign_in_params, only: [:create]
 
   # GET /resource/sign_in
