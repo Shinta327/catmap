@@ -1,6 +1,20 @@
 # frozen_string_literal: true
 
 class Residents::SessionsController < Devise::SessionsController
+
+  # 大会後の住民ユーザーのログイン制限
+  before_action :reject_inactive_resident, only: [:create]
+
+  # 退会済みユーザーを判別しredirectを設定
+  def reject_inactive_resident
+    @resident = Resident.find_by(email: params[:resident][:email])
+    if @resident
+      if @resident.valid_password?(params[:resident][:password]) && @resident.withdrawal
+        redirect_to new_resident_session_path
+      end
+    end
+  end
+
   # before_action :configure_sign_in_params, only: [:create]
 
   # GET /resource/sign_in

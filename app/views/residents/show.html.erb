@@ -1,1 +1,26 @@
 <h1>ここは住民側詳細画面です</h1>
+
+<div class="show">
+  <table class="table">
+    <tbody>
+      <tr>
+        <th>名前</th>
+        <td><%= current_resident.name %></td>
+      </tr>
+      <tr>
+        <th>メールアドレス</th>
+        <td><%= current_resident.email %></td>
+      </tr>
+      <tr>
+        <th>郵便番号</th>
+        <td><%= current_resident.postal_code %></td>
+      </tr>
+      <tr>
+        <th>住所</th>
+        <td><%= current_resident.address %></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div><%= link_to '編集画面', edit_resident_path %></div>
