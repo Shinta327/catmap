@@ -11,5 +11,11 @@ Cat.create!(
     address: '東京駅',
     latitude: '35.681298',
     longitude: '139.7640529',
-    detail: '説明'
+    detail: 'detaildetaildetaildetaildetaildetaildetaildetaildetaildetaildetaildetaildetaildetaildetaildetaildetaildetaildetaildetaildetaildetaildetail'
+  )
+  
+  Cat.create!(
+    resident_id: 1,
+    address: '大阪府摂津市鶴野４丁目3-34',
+    detail: 'detaildetaildetaildetaildetaildetaildetaildetaildetaildetaildetaildetaildetaildetaildetaildetaildetaildetaildetaildetaildetaildetaildetail'
   )

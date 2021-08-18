@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_13_122428) do
+ActiveRecord::Schema.define(version: 2021_08_18_074237) do
 
   create_table "cats", force: :cascade do |t|
     t.integer "resident_id", null: false
@@ -61,9 +61,9 @@ ActiveRecord::Schema.define(version: 2021_08_13_122428) do
 
   create_table "handles", force: :cascade do |t|
     t.integer "group_id"
-    t.integer "cat_id"
+    t.integer "cat_id", null: false
     t.integer "status", default: 0, null: false
-    t.text "detail", null: false
+    t.text "detail"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
