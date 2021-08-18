@@ -10,9 +10,6 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-
-    <!--googlemapを表示させるt目のscript-->
-    <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['API_KEY']%>&callback=initMap" async defer></script>
   </head>
 
   <body>
@@ -26,5 +23,7 @@
       <% end %>
     </header>
     <%= yield %>
+    <!--googlemapを表示させるためのscript-->
+    <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['API_KEY']%>&callback=initMap" async defer></script>
   </body>
 </html>

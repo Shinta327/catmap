@@ -1,0 +1,29 @@
+<p>新規投稿</p>
+<!-- 地名入力用のinputを追加 -->
+<input id="address" type="textbox" value="大阪府">
+<!-- buttonをクリックしたらcodeAddressを実行　-->
+<input type="button" value="Encode" onclick="codeAddress()">
+
+
+<p>野良猫を発見した場所をクリックしてください</p>
+<%= form_with model: cat, local:true do |f| %>
+<div>
+  <!--scriptのdocument.getElementByIdで設定したlatitudeをform_withのformに組み込む-->
+  <%= f.label :latitude, '緯度'%>
+  <%= f.text_field :latitude %>
+</div>
+<div>
+   <!--scriptのdocument.getElementByIdで設定したlongitudeをform_withのformに組み込む-->
+  <%= f.label :longitude, '経度' %>
+  <%= f.text_field :longitude %>
+</div>
+<div>
+  <%= f.attachment_field :image %>
+  <p>猫の写真があれば投稿をお願いします</p>
+</div>
+<div>
+  <p>詳細</p>
+  <%= f.text_area :detail %></br>
+</div>
+<%= f.submit %>
+<% end %>

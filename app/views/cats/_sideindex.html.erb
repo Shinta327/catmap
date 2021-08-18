@@ -1,0 +1,22 @@
+<h1>サイドバーインデックス</h1>
+<%= form_with model: Cat, url: search_cats_path, method: :get, local:true do |f| %>
+<div>
+  <%= f.text_field :address, placeholder: "地名" %>
+</div>
+<div>
+  <%= f.select :status, Handle.statuses.keys,  { prompt: "全て含める" } %>
+</div>
+<%= f.submit '検索' %>
+<% end %>
+
+<div>
+  <% cats.each do |cat| %>
+    <div>
+      <%= link_to cat_path(cat.id) do %>
+        <%= attachment_image_tag cat, :image, :fill, 60, 60, format: 'jpeg', fallback: "no_image.jpg", size: '60x60' %>
+        <%= cat.resident.name %>
+        <%= cat.detail %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
