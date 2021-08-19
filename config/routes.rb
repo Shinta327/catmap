@@ -25,6 +25,7 @@ Rails.application.routes.draw do
 
   # 対応機能のためのルーティング
   resources :handles, only: [:edit, :update]
+  patch 'handles/:id/status' => 'handles#status', as: 'handle_status'
   patch 'handles/:id/failed' => 'handles#failed', as: 'handle_failed'
 
   # 通知機能ためのルーティング
@@ -32,5 +33,6 @@ Rails.application.routes.draw do
 
   # 検索のためのルーティング
   get '/searchs/cats' => 'searchs#cats', as: 'search_cats'
-  get '/searchs/groups' => 'searchs#groups', as: 'search_groups'
+  post '/searchs/groups' => 'searchs#groups', as: 'search_groups'
+  post '/searchs/group_cats' => 'searchs#group_cats', as: 'search_group_cats'
 end

@@ -1,1 +1,57 @@
 <h1>投稿詳細画面</h1>
+
+<div>
+  <%= attachment_image_tag @cat, :image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size: "100x100" %>
+</div>
+<div>
+  <%= @cat.detail %>
+</div>
+<div>
+  <!--対応段階ボタンの設置-->
+  <%= @cat.handle.status %>
+  <% if group_signed_in? %>
+    <% if @status == 0 %>
+      <%= link_to "対応する", handle_status_path(:key => 1), method: :patch %>
+    <% elsif (@status == 1) && (@cat.handle.group_id == current_group) %>
+      <%= link_to "対応完了", handle_status_path(:key => 2), method: :patch %>
+      <%= link_to "対応不可", handle_failed_path, method: :patch, "data-confirm"=>"対応不可にすると以降この投稿に対応できません。よろしいですか？" %>
+    <% elsif @status == 2 %>
+    <% elsif @cat.handle.group_id =! current_group %>
+      <p>他の団体が対応中です</p>
+    <% end %>
+  <% end %>
+</div>
+<div>
+  <% if @status != 2 %>
+    <p>対応詳細はありません</p>
+  <% else %>
+    <%= @cat.handle.detail %>
+  <% end %>
+</div>
+
+<%= link_to "編集する", edit_cat_path %>
+
+<% if @status == 0 && current_resident.id == @cat.resident_id %>
+  <%= link_to "削除する", cat_path, method: :delete, "data-confirm"=>"本当に削除しますか？" %>
+<% end %>
+
+
+<div id="map" style="width: 400px; height: 400px;">
+  <!--地図の設置-->
+</div>
+<script>
+  function initMap(){
+    var latLng = new google.maps.LatLng({lat: gon.cat['latitude'], lng: gon.cat['longitude']});
+    var map = new google.maps.Map(document.getElementById('map'),{
+      center: latLng,
+      zoom: 14
+    });
+    // マーカーの表示
+    var marker = new google.maps.Marker({
+      map: map,
+      position: latLng
+    });
+  }
+</script>
+
+<div>コメント機能（未実装）</div>

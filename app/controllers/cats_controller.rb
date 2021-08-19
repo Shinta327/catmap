@@ -20,15 +20,29 @@ class CatsController < ApplicationController
   end
 
   def show
+    @cat = Cat.find(params[:id])
+    @status = @cat.handle.status_before_type_cast
+    gon.cat = @cat
   end
 
   def edit
+    @cat = Cat.find(params[:id])
+    gon.cat = @cat
+    gon.cats = Cat.all
   end
 
   def update
+    cat = Cat.find(params[:id])
+    cat.update(cat_params)
+    redirect_to cat_path(cat)
   end
 
   def destroy
+    cat = Cat.find(params[:id])
+    if cat.resident_id == current_resident.id
+      cat.destroy
+      redirect_to cats_path
+    end
   end
 
   private

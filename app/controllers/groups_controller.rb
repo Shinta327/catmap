@@ -1,5 +1,7 @@
 class GroupsController < ApplicationController
   def index
+    @groups = Group.where(withdrawal: false)
+    @cats = Cat.all
   end
 
   def show
