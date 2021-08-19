@@ -1,7 +1,7 @@
 class Cat < ApplicationRecord
   # アソシエーション
   belongs_to :resident
-  has_one :handle
+  has_one :handle, dependent: :destroy
 
   # refileのための記述
   attachment :image
