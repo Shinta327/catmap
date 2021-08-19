@@ -1,1 +1,34 @@
 <h1>保護団体一覧ページです</h1>
+<div>
+  <%= form_with model: Group, url: search_groups_path, method: :post, local:true do |f| %>
+  <%= f.text_field :text, placeholder: "団体名・地名" %>
+  <%= f.submit "検索" %>
+  <% end %>
+</div>
+
+ <% @groups.each do |group| %>
+ <%= link_to search_group_cats_path(group: group.id), method: :post, remote: true do %>
+  <div>
+    <div>
+      <%= group.name %>
+    </div>
+    <div>
+      <%= group.email %>
+    </div>
+    <div>
+      <%= group.postal_code %>
+      <%= group.address %>
+    </div>
+    <div>
+      <%= group.explanation %>
+    </div>
+    <div>
+      <%= group.url %>
+    </div>
+  </div>
+<% end %>
+<% end %>
+
+<div id="group_cats">
+  <%= render '/cats/sideindex', cats: @cats %>
+</div>

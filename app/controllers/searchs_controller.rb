@@ -3,15 +3,24 @@ class SearchsController < ApplicationController
   def cats
     address = params[:cat][:address]
     status = params[:cat][:status]
-    search_for(address, status)
+    search_for_cat(address, status)
     gon.cats = @cats
   end
 
   # 保護団体の検索
   def groups
+    name = params[:group][:text]
+    search_for_group(name)
   end
 
-  def search_for(address, status)
+  # 保護団体クリック時に一覧が保護団体のものになるメソッド
+  def group_cats
+    group = params[:group]
+    search_for_group_cats(group)
+  end
+
+  # 投稿一覧画面での地名とステータスの検索振り分け
+  def search_for_cat(address, status)
     if address.present?
       @cats = Cat.where("address LIKE ?", "%#{address}%")
       gon.address = Geocoder.search(address)[0].geometry['location']
@@ -26,4 +35,21 @@ class SearchsController < ApplicationController
       end
     end
   end
+
+  # 保護団体検索後の振り分け
+  def search_for_group(name)
+    if name.present?
+      @groups = Group.where("name LIKE ? OR address LIKE ?", "%#{}name%", "%#{name}%").where(withdrawal: false)
+      @cats = Cat.all
+      render 'groups/index'
+    else
+      redirect_to groups_path
+    end
+  end
+
+  # 保護団体クリック後の投稿一覧の振り分け
+  def search_for_group_cats(group)
+    @cats = Cat.joins(:handle).where("handles.group_id LIKE ?", "#{group}")
+  end
+
 end
