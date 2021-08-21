@@ -1,5 +1,7 @@
 class Comment < ApplicationRecord
   belongs_to :cat
+  belongs_to :group
+  belongs_to :resident
   
   # バリデーション
   with_options presence: true do

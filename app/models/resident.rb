@@ -1,7 +1,8 @@
 class Resident < ApplicationRecord
   # アソシエーション
   has_many :cats
-
+  has_many :comments, dependent: :destroy
+  
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
