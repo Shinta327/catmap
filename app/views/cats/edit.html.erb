@@ -69,17 +69,17 @@
 // 地名検索後のアクションの定義
 function codeAddress(){
 // 入力を取得
-let inputAddress = document.getElementById('address').value;
-
-// geocodingしたあとmapを移動
-geocoder.geocode( { 'address': inputAddress}, function(results, status) {
-  if (status == 'OK') {
-　　　　　　　　　　　　// map.setCenterで地図が移動
-    map.setCenter(results[0].geometry.location);
-  } else {
-    alert('Geocode was not successful for the following reason: ' + status);
-  }
-});
+  let inputAddress = document.getElementById('address').value;
+  geocoder = new google.maps.Geocoder()
+  // geocodingしたあとmapを移動
+  geocoder.geocode( { 'address': inputAddress}, function(results, status) {
+    if (status == 'OK') {
+  　　　　　　　　　　　　// map.setCenterで地図が移動
+      map.setCenter(results[0].geometry.location);
+    } else {
+      alert('Geocode was not successful for the following reason: ' + status);
+    }
+  });
 }
 
     // 緯度経度を取得し表示するための記述

@@ -2,6 +2,7 @@ class Cat < ApplicationRecord
   # アソシエーション
   belongs_to :resident
   has_one :handle, dependent: :destroy
+  has_many :faileds, dependent: :destroy
 
   # refileのための記述
   attachment :image
@@ -17,4 +18,5 @@ class Cat < ApplicationRecord
   Geocoder.configure(language: :ja)
   reverse_geocoded_by :latitude, :longitude
   after_validation :reverse_geocode
+  
 end
