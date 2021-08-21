@@ -1,1 +1,83 @@
-<h1>投稿詳細画面</h1>s
+<h1>投稿詳細画面</h1>
+
+<div>
+  <%= attachment_image_tag @cat, :image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size: "100x100" %>
+</div>
+<div>
+  <%= @cat.detail %>
+</div>
+<div>
+  <!--対応段階ボタンの設置-->
+  <%= @cat.handle.status %>
+
+  <!--閲覧者が保護団体かどうか-->
+  <% if group_signed_in? %>
+  <!--閲覧している保護団体が対応不可かどうか-->
+    <% unless @faileds.include?(current_group.id) %>
+      <% if @status == 0 %>
+        <%= link_to "対応する", handle_status_path(id: @cat.handle, key: 1), method: :patch, "data-confirm"=>"この投稿に対応しますか？" %>
+      <% end %>
+      <% if @status == 1 %>
+        <% if @cat.handle.group_id == current_group.id %>
+          <%= link_to "対応完了", edit_handle_path(@cat.handle) %>
+          <%= link_to "対応不可", handle_failed_path(@cat.handle), method: :patch, "data-confirm"=>"対応不可にすると以降この投稿に対応できません。よろしいですか？" %>
+        <% else %>
+          <p>他の団体が対応中です</p>
+        <% end %>
+      <% end %>
+    <% else %>
+      <P>対応不可</P>
+    <% end %>
+  <% end %>
+</div>
+
+<div>
+  <% if @status != 2 %>
+    <p>対応詳細はありません</p>
+  <% else %>
+    <%= @cat.handle.detail %>
+    <% if @cat.handle.group_id == current_group.id %>
+      <%= link_to '対応詳細の編集', edit_handle_path(@cat.handle) %>
+    <% end %>
+  <% end %>
+</div>
+
+<% if resident_signed_in? %>
+  <% if current_resident.id == @cat.resident_id %>
+    <%= link_to "編集する", edit_cat_path %>
+    <%= link_to "削除する", cat_path, method: :delete, "data-confirm"=>"本当に削除しますか？" %>
+  <% end %>
+<% end %>
+
+
+<div id="map" style="width: 400px; height: 400px;">
+  <!--地図の設置-->
+</div>
+<script>
+  function initMap(){
+    var latLng = new google.maps.LatLng({lat: gon.cat['latitude'], lng: gon.cat['longitude']});
+    var map = new google.maps.Map(document.getElementById('map'),{
+      center: latLng,
+      zoom: 14
+    });
+    // マーカーの表示
+    var marker = new google.maps.Marker({
+      map: map,
+      position: latLng
+    });
+  }
+</script>
+
+<% if resident_signed_in? %>
+  <% if @cat.resident_id == current_resident.id %>
+    <div id="comment">
+      <%= render 'comments/form', comments: @comments, cat: @cat %>
+    </div>
+  <% end %>
+<% elsif group_signed_in? %>
+  <% if @cat.handle.group_id == current_group.id %>
+    <div id="comment">
+      <%= render 'comments/form', comments: @comments, cat: @cat %>
+    </div>
+  <% end %>
+<% end %>

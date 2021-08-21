@@ -10,12 +10,20 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-
-    <!--googlemapを表示させるt目のscript-->
-    <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['API_KEY']%>&callback=initMap" async defer></script>
   </head>
 
   <body>
+    <header>
+      <% if resident_signed_in? %>
+        <%= render "layouts/header/resident" %>
+      <% elsif group_signed_in? %>
+        <%= render "layouts/header/group" %>
+      <% else %>
+        <%= render "layouts/header/before" %>
+      <% end %>
+    </header>
     <%= yield %>
+    <!--googlemapを表示させるためのscript-->
+    <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['API_KEY']%>&callback=initMap" async defer></script>
   </body>
 </html>

@@ -1,1 +1,13 @@
 <h1>対応詳細編集画面</h1>
+<div>
+  <%= form_with model: @handle, local:true do |f| %>
+  <%= f.hidden_field :status %>
+  <div>
+    <%= f.text_area :detail %>
+  </div>
+  <div>
+    <%= f.submit "編集する" %>
+  </div>
+  <% end %>
+</div>
+

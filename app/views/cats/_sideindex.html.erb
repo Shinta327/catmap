@@ -1,0 +1,15 @@
+<div>
+  <% cats.each do |cat| %>
+    <div>
+      <%= link_to cat_path(cat.id) do %>
+        <%= attachment_image_tag cat, :image, :fill, 60, 60, format: 'jpeg', fallback: "no_image.jpg", size: '60x60' %>
+        <%= cat.resident.name %>
+        <%= cat.detail %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+<% if resident_signed_in? %>
+  <%= link_to '投稿する', new_cat_path %>
+<% end %>

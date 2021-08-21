@@ -1,0 +1,33 @@
+<h1>保護団体詳細画面です</h1>
+<div class="show">
+  <table class="table">
+    <tbody>
+      <tr>
+        <th>名前</th>
+        <td><%= current_group.name %></td>
+      </tr>
+      <tr>
+        <th>メールアドレス</th>
+        <td><%= current_group.email %></td>
+      </tr>
+      <tr>
+        <th>郵便番号</th>
+        <td><%= current_group.postal_code %></td>
+      </tr>
+      <tr>
+        <th>住所</th>
+        <td><%= current_group.address %></td>
+      </tr>
+      <tr>
+        <th>サイトURL</th>
+        <td><%= current_group.url %></td>
+      </tr>
+      <tr>
+        <th>団体紹介</th>
+        <td><%= current_group.explanation %></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div><%= link_to '編集画面', edit_group_path %></div>
