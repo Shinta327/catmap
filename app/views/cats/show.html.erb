@@ -9,30 +9,45 @@
 <div>
   <!--対応段階ボタンの設置-->
   <%= @cat.handle.status %>
+
+  <!--閲覧者が保護団体かどうか-->
   <% if group_signed_in? %>
-    <% if @status == 0 %>
-      <%= link_to "対応する", handle_status_path(:key => 1), method: :patch %>
-    <% elsif (@status == 1) && (@cat.handle.group_id == current_group) %>
-      <%= link_to "対応完了", handle_status_path(:key => 2), method: :patch %>
-      <%= link_to "対応不可", handle_failed_path, method: :patch, "data-confirm"=>"対応不可にすると以降この投稿に対応できません。よろしいですか？" %>
-    <% elsif @status == 2 %>
-    <% elsif @cat.handle.group_id =! current_group %>
-      <p>他の団体が対応中です</p>
+  <!--閲覧している保護団体が対応不可かどうか-->
+    <% unless @faileds.include?(current_group.id) %>
+      <% if @status == 0 %>
+        <%= link_to "対応する", handle_status_path(id: @cat.handle, key: 1), method: :patch, "data-confirm"=>"この投稿に対応しますか？" %>
+      <% end %>
+      <% if @status == 1 %>
+        <% if @cat.handle.group_id == current_group.id %>
+          <%= link_to "対応完了", edit_handle_path(@cat.handle) %>
+          <%= link_to "対応不可", handle_failed_path(@cat.handle), method: :patch, "data-confirm"=>"対応不可にすると以降この投稿に対応できません。よろしいですか？" %>
+        <% else %>
+          <p>他の団体が対応中です</p>
+        <% end %>
+      <% end %>
+    <% else %>
+      <P>対応不可</P>
     <% end %>
   <% end %>
 </div>
+
 <div>
   <% if @status != 2 %>
     <p>対応詳細はありません</p>
   <% else %>
     <%= @cat.handle.detail %>
+    <% if @cat.handle.group_id == current_group.id %>
+      <%= link_to '対応詳細の編集', edit_handle_path(@cat.handle) %>
+    <% end %>
   <% end %>
 </div>
 
 <%= link_to "編集する", edit_cat_path %>
 
-<% if @status == 0 && current_resident.id == @cat.resident_id %>
-  <%= link_to "削除する", cat_path, method: :delete, "data-confirm"=>"本当に削除しますか？" %>
+<% if resident_signed_in? %>
+  <% if @status == 0 && current_resident.id == @cat.resident_id %>
+    <%= link_to "削除する", cat_path, method: :delete, "data-confirm"=>"本当に削除しますか？" %>
+  <% end %>
 <% end %>
 
 

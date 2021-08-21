@@ -23,4 +23,5 @@ class Group < ApplicationRecord
   # geocoderで住所カラムから経度・緯度に変換し保存するための記述
   geocoded_by :address
   after_validation :geocode, if: :address_changed?
+  
 end

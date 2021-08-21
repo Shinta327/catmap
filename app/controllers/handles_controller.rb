@@ -1,14 +1,36 @@
 class HandlesController < ApplicationController
   def edit
+    @handle = Handle.find(params[:id])
   end
 
   def update
+    handle = Handle.find(params[:id])
+    handle.status = 2
+    handle.update(handle_params)
+    redirect_to cat_path(handle.cat)
   end
-  
+
   def status
+    value = params[:key].to_i
+    @handle = Handle.find(params[:id])
+    if value == 1
+      @handle.update( group_id: current_group.id, status: value)
+      redirect_to request.referer
+    else
+      redirect_to request.referer
+    end
   end
 
   # 未対応に戻す際、対応テーブルから保護団体IDの削除と対応失敗テーブルのオブジェクト作成
   def failed
+    handle = Handle.find(params[:id])
+    handle.update(group_id: nil, status: 0)
+    Failed.create(cat_id: handle.cat.id, group_id: current_group.id)
+    redirect_to request.referer
+  end
+
+  private
+  def handle_params
+    params.require(:handle).permit(:detail)
   end
 end

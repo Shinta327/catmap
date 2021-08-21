@@ -23,6 +23,8 @@ class CatsController < ApplicationController
     @cat = Cat.find(params[:id])
     @status = @cat.handle.status_before_type_cast
     gon.cat = @cat
+    # 投稿に対する失敗した団体idを取得
+    @faileds = @cat.faileds.pluck(:group_id)
   end
 
   def edit
