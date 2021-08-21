@@ -25,6 +25,7 @@ class CatsController < ApplicationController
     gon.cat = @cat
     # 投稿に対する失敗した団体idを取得
     @faileds = @cat.faileds.pluck(:group_id)
+    @comments = @cat.comments
   end
 
   def edit

@@ -68,4 +68,16 @@
   }
 </script>
 
-<div>コメント機能（未実装）</div>
+<% if resident_signed_in? %>
+  <% if @cat.resident_id == current_resident.id %>
+    <div id="comment">
+      <%= render 'comments/form', comments: @comments, cat: @cat %>
+    </div>
+  <% end %>
+<% elsif group_signed_in? %>
+  <% if @cat.handle.group_id == current_group.id %>
+    <div id="comment">
+      <%= render 'comments/form', comments: @comments, cat: @cat %>
+    </div>
+  <% end %>
+<% end %>

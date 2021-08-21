@@ -1,4 +1,6 @@
 class ResidentsController < ApplicationController
+  has_many :comments, dependent: :destroy
+  
   def show
   end
 
