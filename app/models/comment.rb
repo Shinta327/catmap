@@ -1,8 +1,8 @@
 class Comment < ApplicationRecord
   belongs_to :cat
-  belongs_to :group
-  belongs_to :resident
-  
+  belongs_to :group, optional: true
+  belongs_to :resident, optional: true
+
   # バリデーション
   with_options presence: true do
     validates :cat_id
