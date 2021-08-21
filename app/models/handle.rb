@@ -6,9 +6,9 @@ class Handle < ApplicationRecord
   with_options presence: true do
     validates :cat_id
      # ステータスが1以上（対応中、対応完了）の場合not null
-    validates :group_id,  if: -> { status_before_type_cast > 0 }
+    validates :group_id,  if: -> { status_before_type_cast.to_i >= 1 }
     # ステータスが２（対応完了）の場合not null
-    validates :detail,    if: -> { status_before_type_cast == 2 }
+    validates :detail,    if: -> { status_before_type_cast.to_i == 2 }
   end
 
   # enumの設定

@@ -42,10 +42,9 @@
   <% end %>
 </div>
 
-<%= link_to "編集する", edit_cat_path %>
-
 <% if resident_signed_in? %>
-  <% if @status == 0 && current_resident.id == @cat.resident_id %>
+  <% if current_resident.id == @cat.resident_id %>
+    <%= link_to "編集する", edit_cat_path %>
     <%= link_to "削除する", cat_path, method: :delete, "data-confirm"=>"本当に削除しますか？" %>
   <% end %>
 <% end %>
