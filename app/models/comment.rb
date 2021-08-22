@@ -2,6 +2,8 @@ class Comment < ApplicationRecord
   belongs_to :cat
   belongs_to :group, optional: true
   belongs_to :resident, optional: true
+  # 通知用アソシエーション
+  has_many :comments, dependent: :destroy
 
   # バリデーション
   with_options presence: true do
@@ -12,4 +14,23 @@ class Comment < ApplicationRecord
     validates :group_id,    if: -> { resident_id.blank? }
   end
 
+  # residentが投稿にコメントした時
+  def send_resident_comment(resident_send_id, group_receive_id)
+    notification = Resident.find(resident_send_id).active_notifications.new(
+      comment_id: id,
+      resident_send_id: resident_send_id,
+      group_receive_id: group_receive_id
+      )
+    notification.save if notification.valid?
+  end
+
+  # groupが投稿にコメントした時
+  def send_group_comment(group_send_id, resident_receive_id)
+    notification = Group.find(group_send_id).active_notifications.new(
+      comment_id: id,
+      group_send_id: group_send_id,
+      resident_receive_id: resident_receive_id
+      )
+    notification.save if notification.valid?
+  end
 end

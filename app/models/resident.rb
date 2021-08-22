@@ -2,7 +2,11 @@ class Resident < ApplicationRecord
   # アソシエーション
   has_many :cats
   has_many :comments, dependent: :destroy
-
+  # 通知機能用のアソシエーション
+  # 自分からの通知
+  has_many :active_notifications, class_name: 'Notice', foreign_key: 'resident_send_id', dependent: :destroy 
+  # 相手からの通知
+  has_many :passive_notifications, class_name: 'Notice', foreign_key: 'resident_receive_id', dependent: :destroy
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
