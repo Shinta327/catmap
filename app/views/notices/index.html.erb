@@ -1,1 +1,22 @@
 <h1>通知一覧画面</h1>
+<% if @notices.pluck(:check).include?(false) %>
+  <% if resident_signed_in? %>
+    <div>
+      <% @notices.each do |notice| %>
+        <%= link_to notice_path(notice), method: :patch, local:true do %>
+          <div><%= notice.group_send.name %>様からコメントがあります。</div>
+        <% end %>
+      <% end %>
+    </div>
+  <% elsif group_signed_in? %>
+    <div>
+      <% @notices.each do |notice| %>
+        <%= link_to notice_path(notice), method: :patch, local:true do %>
+          <div><%= notice.resident_send.name %>様からコメントがあります。</div>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+<% else %>
+  <div>通知はありません</div>
+<% end %>
