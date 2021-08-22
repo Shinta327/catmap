@@ -1,4 +1,7 @@
 class ResidentsController < ApplicationController
+  # ログイン前のアクション制限
+  before_action :authenticate_resident!
+
   def show
   end
 

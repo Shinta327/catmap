@@ -5,6 +5,7 @@
         <%= attachment_image_tag cat, :image, :fill, 60, 60, format: 'jpeg', fallback: "no_image.jpg", size: '60x60' %>
         <%= cat.resident.name %>
         <%= cat.detail %>
+        <%= cat.address.delete("日本,") %>
       <% end %>
     </div>
   <% end %>

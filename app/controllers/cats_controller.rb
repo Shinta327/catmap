@@ -1,4 +1,6 @@
 class CatsController < ApplicationController
+  # ログイン前residentの制限(一覧、詳細は制限なし)
+  before_action :authenticate_resident!, except: [:index, :show]
   def index
     gon.cats = Cat.all
     @cats = Cat.all

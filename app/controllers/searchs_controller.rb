@@ -13,7 +13,7 @@ class SearchsController < ApplicationController
     search_for_group(name)
   end
 
-  # 保護団体クリック時に一覧が保護団体のものになるメソッド
+  # 保護団体クリック時に一覧が保護団体のものになるアクション
   def group_cats
     group = params[:group]
     search_for_group_cats(group)
@@ -39,7 +39,7 @@ class SearchsController < ApplicationController
   # 保護団体検索後の振り分け
   def search_for_group(name)
     if name.present?
-      @groups = Group.where("name LIKE ? OR address LIKE ?", "%#{}name%", "%#{name}%").where(withdrawal: false)
+      @groups = Group.where("name LIKE ? OR address LIKE ?", "%#{name}%", "%#{name}%").where(withdrawal: false)
       @cats = Cat.all
       render 'groups/index'
     else

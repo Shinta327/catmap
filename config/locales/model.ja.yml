@@ -1,0 +1,45 @@
+ja:
+  activerecord:
+    models:
+      cat: 依頼
+      resident: 依頼者
+      group: 保護団体
+      comment: コメント
+      failed: 対応不可
+      handle: 対応
+      notice: 通知
+    attributes:
+      cat:
+        address: 住所
+        latitude: 緯度
+        longitude: 軽度
+        iamge_id: 写真
+        detail: 依頼詳細
+      resident:
+        email: メールアドレス
+        name: お名前
+        postal_code: 郵便番号
+        address: 住所
+        latitude: 緯度
+        longitude: 軽度
+        withdrawal: 退会フラグ
+        encrypted_password: パスワード
+        password: パスワード
+      group:
+        email: メールアドレス
+        name: 団体名
+        postal_code: 郵便番号
+        address: 住所
+        latitude: 緯度
+        longitude: 軽度
+        withdrawal: 退会フラグ
+        url: url
+        explanation: 団体説明
+        encrypted_password: パスワード
+        password: パスワード
+      comment:
+        comment: コメント
+      handle:
+        status: 対応段階
+        detail: 対応詳細
+      notice:
