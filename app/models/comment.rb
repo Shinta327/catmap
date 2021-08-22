@@ -3,7 +3,7 @@ class Comment < ApplicationRecord
   belongs_to :group, optional: true
   belongs_to :resident, optional: true
   # 通知用アソシエーション
-  has_many :comments, dependent: :destroy
+  has_many :notices, dependent: :destroy
 
   # バリデーション
   with_options presence: true do

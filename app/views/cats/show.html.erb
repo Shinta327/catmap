@@ -36,7 +36,7 @@
     <p>対応詳細はありません</p>
   <% else %>
     <%= @cat.handle.detail %>
-    <% if @cat.handle.group_id == current_group.id %>
+    <% if group_signed_in? && (@cat.handle.group_id == current_group.id) %>
       <%= link_to '対応詳細の編集', edit_handle_path(@cat.handle) %>
     <% end %>
   <% end %>

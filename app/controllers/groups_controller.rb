@@ -1,4 +1,7 @@
 class GroupsController < ApplicationController
+  # ログイン前のアクション制限（一覧は制限なし）
+  before_action :authenticate_group!, except: [:index]
+  
   def index
     @groups = Group.where(withdrawal: false)
     @cats = Cat.all

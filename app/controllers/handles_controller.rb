@@ -1,4 +1,6 @@
 class HandlesController < ApplicationController
+  # ログイン前のアクション制限
+  
   def edit
     @handle = Handle.find(params[:id])
   end
