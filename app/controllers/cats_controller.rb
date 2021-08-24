@@ -7,18 +7,23 @@ class CatsController < ApplicationController
   end
 
   def new
-    gon.cats = Cat.all
     @cat = Cat.new
+    gon.cats = Cat.all
   end
 
   def create
     # 投稿用の記述
-    cat = Cat.new(cat_params)
-    cat.resident_id = current_resident.id
-    cat.save
-    # 投稿時に対応テーブルのオブジェクトも作成し保存する記述
-    Handle.create(cat_id: cat.id)
-    redirect_to cat_path(cat.id)
+    @cat = Cat.new(cat_params)
+    @cat.resident_id = current_resident.id
+    if @cat.save
+      # 投稿時に対応テーブルのオブジェクトも作成し保存する記述
+      Handle.create(cat_id: @cat.id)
+      redirect_to cat_path(@cat.id)
+    else
+      # render用の変数定義
+      gon.cats = Cat.all
+      render :new
+    end
   end
 
   def show

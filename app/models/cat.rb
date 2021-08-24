@@ -13,7 +13,7 @@ class Cat < ApplicationRecord
     validates :resident_id
     validates :latitude
     validates :longitude
-    validates :detail, length: { minimum: 50 }
+    validates :detail
   end
 
   Geocoder.configure(language: :ja)
