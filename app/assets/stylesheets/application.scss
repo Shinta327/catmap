@@ -18,3 +18,9 @@
 @import "bootstrap";
 @import 'font-awesome-sprockets';
 @import 'font-awesome';
+
+.field_with_errors {
+  input {
+  @extend .is-invalid;
+  }
+}
