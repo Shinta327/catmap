@@ -1,14 +1,9 @@
-<h1>投稿一覧画面</h1>
+<div class="form-group col-3 bg-light">
+  <%= render "/searchs/address_form" %>
+  <%= render "/cats/sideindex/", cats: @cats %>
+</div>
+<div class="col-9" id="index-map"></div>
 
-<div id='map'></div>
-
-<style>
-#map{
-  height: 400px;
-  width: 600px;
-}
-</style>
- 
 <script>
   let map
   let geocoder
@@ -33,7 +28,7 @@
             geocoder = new google.maps.Geocoder()
             // マップオブジェクト作成
             map = new google.maps.Map(
-              document.getElementById("map"), // マップを表示する要素
+              document.getElementById("index-map"), // マップを表示する要素
               mapOptions         // マップオプション
             );
             //　マップにマーカーを表示する
@@ -74,6 +69,3 @@
       }
     }
   </script>
-
-<%= render "/searchs/address_form" %>
-<%= render "/cats/sideindex/", cats: @cats %>

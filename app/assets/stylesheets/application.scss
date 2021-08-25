@@ -15,12 +15,33 @@
  */
 
 // bootstrapとjabascriptの読み込み
-@import "bootstrap";
-@import 'font-awesome-sprockets';
-@import 'font-awesome';
+@import"bootstrap";
+@import'font-awesome-sprockets';
+@import'font-awesome';
 
-.field_with_errors {
-  input {
-  @extend .is-invalid;
-  }
+.nav-item{
+  font-size:20px;
+}
+
+#index-map{
+  height: calc(100vh - 76px);
+  postion: sticky;
+}
+
+#nav-map,
+#nav-comment{
+  height: 65vh;
+}
+
+#comment{
+  height: calc(65vh - 62px);
+}
+
+.cat-detail{
+  height: 32vh;
+}
+
+.cat-detail_image{
+  width: 15vw;
+  height: 32vh;
 }

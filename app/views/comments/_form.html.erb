@@ -1,32 +1,25 @@
- <div>
-  <% comments.each do |comment| %>
-  <div>
-    <%= comment.comment %>
-    <% if resident_signed_in? %>
-      <% if comment.resident_id == current_resident.id %>
-        <%= link_to '削除', cat_comment_path(cat, comment), method: :delete, remote:true %>
-      <% end %>
-    <% elsif group_signed_in? %>
-      <% if comment.group_id == current_group.id %>
-        <%= link_to '削除', cat_comment_path(cat, comment), method: :delete, remote:true %>
-      <% end %>
-    <% end %>
-  </div>
-  <% end %>
-</div>
-<div>
-  <% if resident_signed_in? %>
-    <%= form_with model: Comment.new, url: cat_comments_path(cat), remote:true do |f| %>
+<% if resident_signed_in? %>
+  <%= form_with model: comment, url: cat_comments_path(cat), remote:true do |f| %>
     <%= f.hidden_field :resident_id, value: current_resident.id %>
-    <%= f.text_area :comment %>
-    <%= f.submit 'コメントする' %>
-    <% end %>
-  <% else %>
-    <%= form_with model: Comment.new, url: cat_comments_path(cat), remote:true do |f| %>
-    <%= f.hidden_field :group_id, value: current_group.id %>
-    <%= f.text_area :comment %>
-    <%= f.submit 'コメントする' %>
-    <% end %>
+    <div class="form-row">
+      <div class="col-10">
+        <%= f.text_area :comment, class: "form-control", placeholder: "コメント" %>
+      </div>
+      <div class="col-2 d-flex">
+        <%= f.submit '投稿', class: "btn btn-primary w-100" %>
+      </div>
+    </div>
   <% end %>
-</div>
-
+<% else %>
+  <%= form_with model: comment, url: cat_comments_path(cat), remote:true do |f| %>
+    <%= f.hidden_field :group_id, value: current_group.id %>
+    <div class="form-row d-flex">
+      <div class="col-10">
+        <%= f.text_area :comment, class: "form-control", placeholder: "コメント" %>
+      </div>
+      <div class="col-2 d-flex align-items-end">
+        <%= f.submit '投稿', class: "btn btn-primary w-100" %>
+      </div>
+    </div>
+  <% end %>
+<% end %>
