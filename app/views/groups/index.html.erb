@@ -1,4 +1,8 @@
-<h1>保護団体一覧ページです</h1>
+<div id="group_cats" class="col-3 bg-light sidebar overflow-auto">
+  <%= render '/cats/sideindex', cats: @cats %>
+</div>
+
+<div class="col-9">
 <div>
   <%= form_with model: Group, url: search_groups_path, method: :post, local:true do |f| %>
   <%= f.text_field :text, placeholder: "団体名・地名" %>
@@ -29,6 +33,4 @@
 <% end %>
 <% end %>
 
-<div id="group_cats">
-  <%= render '/cats/sideindex', cats: @cats %>
 </div>

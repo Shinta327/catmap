@@ -1,16 +1,23 @@
-<div>
-  <% cats.each do |cat| %>
-    <div>
-      <%= link_to cat_path(cat.id) do %>
-        <%= attachment_image_tag cat, :image, :fill, 60, 60, format: 'jpeg', fallback: "no_image.jpg", size: '60x60' %>
-        <%= cat.resident.name %>
-        <%= cat.detail %>
-        <%= cat.address.delete("日本,") %>
+<div class="container-fluid">
+  <div class="row">
+    <% cats.each do |cat| %>
+      <%= link_to cat_path(cat), class: "text-decoration-none text-reset" do %>
+        <div class="card" style="height: 20vh;">
+          <div class="row no-gutters card-body">
+            <div class="col-4">
+                <%= attachment_image_tag cat, :image, format: 'jpeg', fallback: "no_image.jpg", style: "height: 100%; width: 100%;" %>
+            </div>
+            <div class="col-8 pl-2">
+              <div class="h-50">
+                <p class="card-text fas fa-user text-black-50"><%= cat.resident.name %></p>
+              </div>
+              <div class="h-50">
+                <p class="card-text fas fa-map-marker-alt text-black-50"><%= cat.address.delete("日本、") %></p>
+              </div>
+            </div>
+          </div>
+        </div>
       <% end %>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
 </div>
-
-<% if resident_signed_in? %>
-  <%= link_to '投稿する', new_cat_path %>
-<% end %>

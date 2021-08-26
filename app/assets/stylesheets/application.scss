@@ -19,29 +19,44 @@
 @import'font-awesome-sprockets';
 @import'font-awesome';
 
+// ヘッダーの文字サイズ
 .nav-item{
   font-size:20px;
 }
 
+// 大画面での地図の高さの調整（76pxはヘッダーの高さ）
 #index-map{
   height: calc(100vh - 76px);
-  postion: sticky;
 }
 
+// 投稿詳細画面のタブコンテンツの大きさ
 #nav-map,
 #nav-comment{
   height: 65vh;
 }
 
+// コメント一覧の高さ（投稿フォームを引いた値）
 #comment{
   height: calc(65vh - 62px);
 }
 
+//　投稿詳細画面左側の上下の高さ
 .cat-detail{
   height: 32vh;
 }
 
+// 投稿詳細画面の画像の大きさの固定
 .cat-detail_image{
   width: 15vw;
   height: 32vh;
+}
+
+// ユーザー詳細画面でのサイドバーの高さの調整、固定
+.sidebar{
+  height: calc(100vh - 76px);
+}
+
+// indexにマウスが乗ると色が変わる
+.card:hover{
+  background-color: rgba(0, 0, 0, 0.1);
 }

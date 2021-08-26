@@ -5,15 +5,15 @@
       <div class="col-10">
         <%= f.text_area :comment, class: "form-control", placeholder: "コメント" %>
       </div>
-      <div class="col-2 d-flex">
+      <div class="col-2 d-flex align-items-end">
         <%= f.submit '投稿', class: "btn btn-primary w-100" %>
       </div>
     </div>
   <% end %>
-<% else %>
+<% elsif group_signed_in? %>
   <%= form_with model: comment, url: cat_comments_path(cat), remote:true do |f| %>
     <%= f.hidden_field :group_id, value: current_group.id %>
-    <div class="form-row d-flex">
+    <div class="form-row">
       <div class="col-10">
         <%= f.text_area :comment, class: "form-control", placeholder: "コメント" %>
       </div>

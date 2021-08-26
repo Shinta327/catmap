@@ -3,6 +3,7 @@ class ResidentsController < ApplicationController
   before_action :authenticate_resident!
 
   def show
+    @cats = Cat.where(resident_id: current_resident.id)
   end
 
   def edit

@@ -6,13 +6,16 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
+        <%= link_to '依頼', new_cat_path, class: "nav-link fas fa-external-link-alt" %>
+      </li>
+      <li class="nav-item">
         <%= link_to 'マイページ', resident_path, class: "nav-link fas fa-address-card" %>
       </li>
       <li class="nav-item">
         <%= link_to '保護団体', groups_path, class: "nav-link fas fa-users" %>
       </li>
        <li class="nav-item">
-        <%= link_to '野良猫マップ', cats_path, class: "nav-link fas fa-paw" %>
+        <%= link_to 'マップ', cats_path, class: "nav-link fas fa-paw" %>
       </li>
        <li class="nav-item">
         <%= link_to 'ログアウト', destroy_resident_session_path, method: :delete, class: "nav-link fas fa-sign-out-alt" %>

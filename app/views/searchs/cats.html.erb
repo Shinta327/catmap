@@ -1,15 +1,12 @@
-<div class="form-group col-3 bg-light">
-  <%= render "/searchs/address_form" %>
-  <%= render "/cats/sideindex/", cats: @cats %>
+<div class="col-3 bg-light sidebar position-relative">
+  <div style="position: sticky;">
+    <%= render "/searchs/address_form" %>
+  </div>
+  <div class="overflow-auto" style="height: calc(100vh - 76px - 178px)">
+    <%= render "/cats/sideindex/", cats: @cats %>
+  </div>
 </div>
 <div class="col-9" id="index-map"></div>
-<style>
-#map{
-  height: 400px;
-  width: 600px;
-}
-</style>
-
 <script>
 let address = gon.address
 if (address == null){
@@ -93,6 +90,3 @@ if (address == null){
   }
 
 </script>
-
-<%= render "/searchs/address_form" %>
-<%= render "/cats/sideindex", cats: @cats %>

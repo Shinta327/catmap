@@ -11,11 +11,11 @@
       <div class="col-2">
           <% if resident_signed_in? %>
             <% if comment.resident_id == current_resident.id %>
-              <%= link_to '削除', cat_comment_path(cat, comment), method: :delete, remote:true, class: "btn-sm btn-danger float-right" %>
+              <%= link_to '削除', cat_comment_path(cat, comment), method: :delete, remote:true, class: "btn btn-sm btn-danger float-right" %>
             <% end %>
           <% elsif group_signed_in? %>
             <% if comment.group_id == current_group.id %>
-              <%= link_to '削除', cat_comment_path(cat, comment), method: :delete, remote:true, class: "btn-sm btn-danger float-left" %>
+              <%= link_to '削除', cat_comment_path(cat, comment), method: :delete, remote:true, class: "btn btn-sm btn-danger float-left" %>
             <% end %>
           <% end %>
         </div>
@@ -25,11 +25,11 @@
         <div class="col-2">
           <% if resident_signed_in? %>
             <% if comment.resident_id == current_resident.id %>
-              <%= link_to '削除', cat_comment_path(cat, comment), method: :delete, remote:true, class: "btn-sm btn-danger float-right" %>
+              <%= link_to '削除', cat_comment_path(cat, comment), method: :delete, remote:true, class: "btn btn-sm btn-danger float-right" %>
             <% end %>
           <% elsif group_signed_in? %>
             <% if comment.group_id == current_group.id %>
-              <%= link_to '削除', cat_comment_path(cat, comment), method: :delete, remote:true, class: "btn-sm btn-danger float-left" %>
+              <%= link_to '削除', cat_comment_path(cat, comment), method: :delete, remote:true, class: "btn btn-sm btn-danger float-left" %>
             <% end %>
           <% end %>
         </div>
