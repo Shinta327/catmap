@@ -3,34 +3,53 @@
 </div>
 
 <div class="col-9">
-<div>
-  <%= form_with model: Group, url: search_groups_path, method: :post, local:true do |f| %>
-  <%= f.text_field :text, placeholder: "団体名・地名" %>
-  <%= f.submit "検索" %>
-  <% end %>
-</div>
-
- <% @groups.each do |group| %>
- <%= link_to search_group_cats_path(group: group.id), method: :post, remote: true do %>
-  <div>
-    <div>
-      <%= group.name %>
-    </div>
-    <div>
-      <%= group.email %>
-    </div>
-    <div>
-      <%= group.postal_code %>
-      <%= group.address %>
-    </div>
-    <div>
-      <%= group.explanation %>
-    </div>
-    <div>
-      <%= group.url %>
+  <div class="container">
+    <div class="row">
+      <div class="col-8 offset-md-2">
+        <div class="row">
+          <div class="col-10">
+            <%= form_with model: Group, url: search_groups_path, method: :post, local:true do |f| %>
+            <%= f.text_field :text, class: "form-control", placeholder: "団体名・地名" %>
+          </div>
+          <div class="col-2 text-right">
+            <%= f.submit "検索", class: "btn btn-secondary" %>
+            <% end %>
+          </div>
+        </div>
+        <% @groups.each do |group| %>
+        <%= link_to search_group_cats_path(group: group.id), method: :post, class: "text-decoration-none text-reset", remote: true do %>
+        <div class="row index-card text-black-50">
+          <div class="col-12 pt-2 pb-2 border-bottom">
+            <div class="row">
+              <div class="col-4 d-flex align-items-center justify-content-center">
+                <span class="fas fa-users index-logo"></span>
+              </div>
+              <div class="col-8">
+                <div>
+                  <span class="fas fa-paw"><%= group.name %></span>
+                  <span class="fas fa-paw ml-5"><%= group.email %></span>
+                </div>
+                <div class="mt-2">
+                  <span class="fas fa-paw">〒<%= group.postal_code %><%= group.address %></span>
+                </div>
+                <div class="mt-2">
+                  <span class="fas fa-paw"><%= group.url %><span>
+                </div>
+                <div></div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <div class="mt-2 border rounded p-2">
+                  <%= group.explanation %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <% end %>
+        <% end %>
+      </div>
     </div>
   </div>
-<% end %>
-<% end %>
-
 </div>

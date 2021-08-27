@@ -60,3 +60,13 @@
 .card:hover{
   background-color: rgba(0, 0, 0, 0.1);
 }
+
+// 保護団体一覧でマウスが乗ると色が変わる
+.index-card:hover{
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+//　保護団体一覧画面のロゴの大きさ
+.index-logo{
+  font-size: 80px;
+}
