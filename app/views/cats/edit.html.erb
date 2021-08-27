@@ -1,14 +1,7 @@
-<h1>投稿編集画面</h1>
-
-
-<div id='map'></div>
-
-<style>
-#map{
-  height: 400px;
-  width: 600px;
-}
-</style>
+<div class="form-group col-3 bg-light">
+  <%= render '/cats/form', cat: @cat %>
+</div>
+<div class="col-9" id="index-map"></div>
 
 <script>
   let map
@@ -24,7 +17,7 @@
       };
       // マップオブジェクト作成
       map = new google.maps.Map(
-        document.getElementById("map"), // マップを表示する要素
+        document.getElementById("index-map"), // マップを表示する要素
         mapOptions         // マップオプション
       );
       //　マップにマーカーを表示する
@@ -90,5 +83,3 @@ function codeAddress(){
       document.getElementById('cat_longitude').value = lng;
     }
   </script>
-
-<%= render '/cats/form', cat: @cat %>

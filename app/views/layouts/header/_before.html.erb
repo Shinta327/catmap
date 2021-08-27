@@ -1,19 +1,22 @@
-<div class="header">
-  <ul class="nav">
-    <li class="nav-item">
-      <a class="nav-link" href="/">猫マップ</a>
-    </li>
-    <li class="nav-item">
-      <%= link_to "保護団体一覧", groups_path %>
-    </li>
-    <li class="nav-item">
-      <%= link_to '野良猫マップ', cats_path %>
-    </li>
-    <li class="nav-item">
-      <%= link_to 'ログイン', new_resident_session_path %>
-    </li>
-    <li class="nav-item">
-      <%= link_to '会員登録', new_resident_registration_path %>
-    </li>
-  </ul>
-</div>
+<nav class="col-12 px-4 navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand ml-5" href="/"><%= image_tag 'logo.png', :size => '50x50' %></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ml-auto mr-5">
+      <li class="nav-item">
+        <%= link_to '保護団体', groups_path, class: "nav-link fas fa-users" %>
+      </li>
+       <li class="nav-item">
+        <%= link_to 'マップ', cats_path, class: "nav-link fas fa-paw" %>
+      </li>
+       <li class="nav-item">
+        <%= link_to 'ログイン', new_resident_session_path, class: "nav-link fas fa-sign-in-alt" %>
+      </li>
+      <li class="nav-item">
+        <%= link_to '登録', new_resident_registration_path, class: "nav-link fas fa-user-plus" %>
+      </li>
+    </ul>
+  </div>
+</nav>

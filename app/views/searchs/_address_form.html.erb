@@ -1,10 +1,16 @@
-<h1>サイドバーインデックス</h1>
-<%= form_with model: Cat, url: search_cats_path, method: :get, local:true do |f| %>
-<div>
-  <%= f.text_field :address, placeholder: "地名" %>
+<div class="pt-4">
+  <%= form_with model: Cat, url: search_cats_path, method: :get, local:true do |f| %>
+    <div>
+      <%= f.text_field :address, placeholder: "地名", class: "form-control" %>
+    </div>
+    <div class="d-flex text-center align-items-center mt-2">
+      <span class="fas fa-paw d-inline" style="width: 30%;">対応段階</span>
+      <div style="width: 70%;">
+        <%= f.select :status, Handle.statuses, { prompt: '全て含める'}, class: "form-control" %>
+      </div>
+    </div>
+    <div class="text-center">
+        <%= f.submit '検索', class: "btn btn-secondary mt-2 mb-4" %>
+      </div>
+  <% end %>
 </div>
-<div>
-  <%= f.select :status, Handle.statuses, { prompt: '全て含める'} %>
-</div>
-<%= f.submit '検索' %>
-<% end %>

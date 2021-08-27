@@ -8,21 +8,35 @@
     <!--gem gonが使用できるようにするための記述-->
     <%= include_gon %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application'  %>
   </head>
 
   <body>
-    <header>
-      <% if resident_signed_in? %>
-        <%= render "layouts/header/resident" %>
-      <% elsif group_signed_in? %>
-        <%= render "layouts/header/group" %>
-      <% else %>
-        <%= render "layouts/header/before" %>
-      <% end %>
-    </header>
-    <%= yield %>
+    <!--通知を表示するためのmodal-->
+    <% if group_signed_in? || resident_signed_in? %>
+      <%= render "layouts/notice_modal" %>
+    <% end %>
+
+    <!--ヘッダー-->
+    <div class="container-fluid sticky-top shadow-sm">
+      <div class="row">
+        <% if resident_signed_in? %>
+          <%= render "layouts/header/resident" %>
+        <% elsif group_signed_in? %>
+          <%= render "layouts/header/group" %>
+        <% else %>
+          <%= render "layouts/header/before" %>
+        <% end %>
+      </div>
+    </div>
+    <!--コンテンツ-->
+    <div class="container-fluid h-100">
+      <div class="row">
+        <%= yield %>
+      </div>
+    </div>
+
     <!--googlemapを表示させるためのscript-->
     <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['API_KEY']%>&callback=initMap" async defer></script>
   </body>

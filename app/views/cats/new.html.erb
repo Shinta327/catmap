@@ -1,14 +1,7 @@
-<h1>投稿画面</h1>
-
-<div id='map'></div>
-
-<style>
-#map{
-  height: 400px;
-  width: 600px;
-}
-</style>
-
+<div class="col-3 bg-light sidebar">
+  <%= render '/cats/form', cat: @cat %>
+</div>
+<div class="col-9" id="index-map"></div>
 <script>
   let map
   let geocoder
@@ -32,7 +25,7 @@
             geocoder = new google.maps.Geocoder()
             // マップオブジェクト作成
             map = new google.maps.Map(
-              document.getElementById("map"), // マップを表示する要素
+              document.getElementById("index-map"), // マップを表示する要素
               mapOptions         // マップオプション
             );
             //　マップにマーカーを表示する
@@ -122,5 +115,3 @@
       document.getElementById('cat_longitude').value = lng;
     }
   </script>
-
-<%= render '/cats/form', cat: @cat %>

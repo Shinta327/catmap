@@ -1,14 +1,12 @@
-<h1>検索後index</h1>
-
-<div id='map'></div>
-
-<style>
-#map{
-  height: 400px;
-  width: 600px;
-}
-</style>
-
+<div class="col-3 bg-light sidebar position-relative">
+  <div style="position: sticky;">
+    <%= render "/searchs/address_form" %>
+  </div>
+  <div class="overflow-auto" style="height: calc(100vh - 76px - 178px)">
+    <%= render "/cats/sideindex/", cats: @cats %>
+  </div>
+</div>
+<div class="col-9" id="index-map"></div>
 <script>
 let address = gon.address
 if (address == null){
@@ -31,7 +29,7 @@ if (address == null){
           geocoder = new google.maps.Geocoder()
           // マップオブジェクト作成
           map = new google.maps.Map(
-            document.getElementById("map"), // マップを表示する要素
+            document.getElementById("index-map"), // マップを表示する要素
             mapOptions         // マップオプション
           );
           //　マップにマーカーを表示する
@@ -74,7 +72,7 @@ if (address == null){
 } else {
   function initMap(){
     var latLng = address;
-    let map = new google.maps.Map(document.getElementById('map'),{
+    let map = new google.maps.Map(document.getElementById('index-map'),{
       center: latLng,
       zoom: 14
       });
@@ -92,6 +90,3 @@ if (address == null){
   }
 
 </script>
-
-<%= render "/searchs/address_form" %>
-<%= render "/cats/sideindex", cats: @cats %>
