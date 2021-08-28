@@ -70,3 +70,15 @@
 .index-logo{
   font-size: 80px;
 }
+
+// エラー時にフォームを赤く囲う
+.field_with_errors {
+  input, textarea {
+    @extend .is-invalid;
+  }
+}
+
+// 登録画面のformの横幅
+.form-signup{
+  width: 30%;
+}
