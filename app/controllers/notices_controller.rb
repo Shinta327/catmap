@@ -1,6 +1,6 @@
 class NoticesController < ApplicationController
-  # ログイン制限
-
+  # コメントの通知を取得するためのメソッド（全てのビューで使用するため）
+  before_action :notice_index
   # 表示のために取得したらチェックカラムをtrueにする処理を記述する
   def index
     if resident_signed_in?

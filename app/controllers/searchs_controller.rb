@@ -1,4 +1,6 @@
 class SearchsController < ApplicationController
+  # コメントの通知を取得するためのメソッド（全てのビューで使用するため）
+  before_action :notice_index
   # 猫の投稿の検索
   def cats
     address = params[:cat][:address]

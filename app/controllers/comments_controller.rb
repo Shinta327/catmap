@@ -1,4 +1,6 @@
 class CommentsController < ApplicationController
+  # コメントの通知を取得するためのメソッド（全てのビューで使用するため）
+  before_action :notice_index
   # 通知テーブルのオブジェクトも同時に作成する
   def create
     comment = Comment.new(comment_params)

@@ -2,7 +2,7 @@
 
 class Residents::SessionsController < Devise::SessionsController
 
-  # 大会後の住民ユーザーのログイン制限
+  # 退会後の住民ユーザーのログイン制限
   before_action :reject_inactive_resident, only: [:create]
 
   # 退会済みユーザーを判別しredirectを設定

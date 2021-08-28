@@ -1,4 +1,6 @@
 class CatsController < ApplicationController
+  # コメントの通知を取得するためのメソッド（全てのビューで使用するため）
+  before_action :notice_index
   # ログイン前residentの制限(一覧、詳細は制限なし)
   before_action :authenticate_resident!, except: [:index, :show]
   def index

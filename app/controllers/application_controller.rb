@@ -2,8 +2,8 @@ class ApplicationController < ActionController::Base
   # deviseでカスタマイズしたカラムを受け取るためのstrong paramaterの設定
   before_action :configure_permitted_parameters, if: :devise_controller?
 
-  # コメントの通知を取得するためのメソッド（全てのビューでしようするため）
-  before_action :notice_index
+  # コメントの通知を取得するためのメソッド（全てのビューで使用するため）
+  # before_action :notice_index
 
   # ログイン後の遷移先
   def after_sign_in_path_for(resource)
