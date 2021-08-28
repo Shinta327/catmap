@@ -16,9 +16,12 @@ class GroupsController < ApplicationController
   end
 
   def update
-    group = current_group
-    group.update(group_params)
-    redirect_to group_path(current_group)
+    @group = current_group
+    if  @group.update(group_params)
+      redirect_to group_path(current_group)
+    else
+      render :edit
+    end
   end
 
   def withdrawal

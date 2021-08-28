@@ -1,15 +1,18 @@
 class HandlesController < ApplicationController
   # ログイン前のアクション制限
-  
+
   def edit
     @handle = Handle.find(params[:id])
   end
 
   def update
-    handle = Handle.find(params[:id])
-    handle.status = 2
-    handle.update(handle_params)
-    redirect_to cat_path(handle.cat)
+    @handle = Handle.find(params[:id])
+    @handle.status = 2
+    if  @handle.update(handle_params)
+      redirect_to cat_path(@handle.cat)
+    else
+      render :edit
+    end
   end
 
   def status
