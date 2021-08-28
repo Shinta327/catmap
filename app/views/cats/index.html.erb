@@ -10,8 +10,7 @@
 <script>
   let map
   let geocoder
-
-
+  let infoWindow = [];
     // 現在地取得処理
     function initMap() {
       // Geolocation APIに対応している
@@ -45,7 +44,20 @@
                 position: markerLatLng, // マーカーを立てる位置を指定
                 map: map // マーカーを立てる地図を指定
               });
-            }
+
+              // マーカに吹き出しを立てる
+              infoWindow[i] = new google.maps.InfoWindow({
+                content:`<div><a href='/cats/${ markerData[i]['id'] }'><div>${ markerData[i]['address']}</div><div>${ gon.handles[i]['status']}</div></a></div>`
+              });
+
+              markerEvent(i); // マーカにクリックイベントを追加
+            };
+            // クリックイベントの定義
+            function markerEvent(i){
+              marker[i].addListener('click', function(){
+                infoWindow[i].open(map, marker[i]);
+              });
+            };
           },
           // 取得失敗した場合
           function(error) {

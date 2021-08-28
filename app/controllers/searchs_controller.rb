@@ -5,6 +5,10 @@ class SearchsController < ApplicationController
     status = params[:cat][:status]
     search_for_cat(address, status)
     gon.cats = @cats
+    gon.handles = []
+      @cats.each do |cat|
+        gon.handles += Handle.where(cat_id: cat.id)
+      end
   end
 
   # 保護団体の検索
