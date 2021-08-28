@@ -10,7 +10,8 @@
             <h4 class="fas fa-paw text-black-50">依頼詳細</h4>
           </div>
           <div class="pt-3 overflow-auto">
-            <%= @cat.detail %>
+            <!--入力時の改行、空白をそのまま表示する-->
+            <%= safe_join(@cat.detail.split("\n"),tag(:br)) %>
           </div>
         </div>
       </div>

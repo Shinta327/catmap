@@ -1,4 +1,6 @@
 class GroupsController < ApplicationController
+  # コメントの通知を取得するためのメソッド（全てのビューで使用するため）
+  before_action :notice_index
   # ログイン前のアクション制限（一覧は制限なし）
   before_action :authenticate_group!, except: [:index]
 
