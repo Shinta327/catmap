@@ -59,10 +59,12 @@
             <h4 class="fas fa-paw text-black-50">対応詳細</h4>
           </div>
           <div class="pt-3 overflow-auto">
-            <% if @status != 2 %>
-              <p>対応詳細はありません</p>
-            <% else %>
-              <%= @cat.handle.detail %>
+            <div>
+              <% if @status != 2 %>
+                <p>対応詳細はありません</p>
+              <% else %>
+                <%= @cat.handle.detail %>
+              </div>
             <% end %>
           </div>
         </div>
