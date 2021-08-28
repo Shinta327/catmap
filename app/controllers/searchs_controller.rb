@@ -22,14 +22,21 @@ class SearchsController < ApplicationController
   # 投稿一覧画面での地名とステータスの検索振り分け
   def search_for_cat(address, status)
     if address.present?
-      @cats = Cat.where("address LIKE ?", "%#{address}%")
+      # addressに複数単語がある場合の記述
+      split_address = address.split(/[[:blank:]]+/)
+      @cats = []
+      split_address.each do |address|
+        next if address == ""
+        @cats = Cat.where("address LIKE ?", "%#{address}%")
+      end
+      @cats.uniq #重複データの削除
       gon.address = Geocoder.search(address)[0].geometry['location']
       if status.present?
-        @cats = Cat.joins(:handle).where("cats.address LIKE ? AND handles.status LIKE ?", "%#{address}%", "#{status}")
+        @cats = @cats.joins(:handle).where("handles.status LIKE ?", "#{status}")
       end
     else
       if status.present?
-        @cats = Cat.joins(:handle).where("cats.address LIKE ? AND handles.status LIKE ?", "%#{address}%", "#{status}")
+        @cats = Cat.joins(:handle).where("handles.status LIKE ?", "#{status}")
       else
         redirect_to cats_path
       end
@@ -39,7 +46,14 @@ class SearchsController < ApplicationController
   # 保護団体検索後の振り分け
   def search_for_group(name)
     if name.present?
-      @groups = Group.where("name LIKE ? OR address LIKE ?", "%#{name}%", "%#{name}%").where(withdrawal: false)
+      # 複数単語の検索可
+      split_name = name.split(/[[:blank:]]+/)
+      @groups = []
+      split_name.each do |name|
+        next if name == ""
+        @groups += Group.where("name LIKE ? OR address LIKE ?", "%#{name}%", "%#{name}%").where(withdrawal: false)
+      end
+      @groups.uniq! #重複したものを削除
       @cats = Cat.all
       render 'groups/index'
     else

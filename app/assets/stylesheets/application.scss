@@ -79,6 +79,24 @@
 }
 
 // 登録画面のformの横幅
-.form-signup{
+.form-signup,
+.form-signin{
   width: 30%;
+}
+
+// topページの画像
+.top-image{
+  height: 70vh;
+  width: 110vh;
+  background-image: image-url('cat.jpeg');
+  background-size: cover;
+}
+
+// 写真のテキスト
+.top-image_text-box{
+  height: 40%;
+  width: 40%;
+  background-color:rgba(255,255,255,0.5);
+  margin-left: 20px;
+  margin-top: 20px;
 }
