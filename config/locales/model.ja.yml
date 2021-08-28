@@ -12,7 +12,7 @@ ja:
       cat:
         address: 住所
         latitude: 緯度
-        longitude: 軽度
+        longitude: 経度
         iamge_id: 写真
         detail: 依頼詳細
       resident:
@@ -21,7 +21,7 @@ ja:
         postal_code: 郵便番号
         address: 住所
         latitude: 緯度
-        longitude: 軽度
+        longitude: 経度
         withdrawal: 退会フラグ
         encrypted_password: パスワード
         password: パスワード
@@ -31,7 +31,7 @@ ja:
         postal_code: 郵便番号
         address: 住所
         latitude: 緯度
-        longitude: 軽度
+        longitude: 経度
         withdrawal: 退会フラグ
         url: url
         explanation: 団体説明

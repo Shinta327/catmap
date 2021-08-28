@@ -1,27 +1,27 @@
 <div class="container-fluid">
   <div class="row justify-content-center align-items-center" style="height: calc(100vh - 76px);">
      <%= form_with model: @resident, url: resident_session_path, class: "form-signin", local: true do |f| %>
-  <div class="field mb-2">
-    <%= f.label :email, class: "fa fa-paw" %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
+      <div class="field mb-4 text-center">
+        <%= image_tag 'logo.png', :size => '100x100' %>
+      </div>
+      <div class="field mb-2">
+        <%= f.label :email, class: "fa fa-paw" %><br />
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
+      </div>
+      <div class="field mb-2">
+        <%= f.label :password, class: "fa fa-paw" %><br />
+        <%= f.password_field :password, autocomplete: "current-password", class: "form-control" %>
+      </div>
+      <% if devise_mapping.rememberable? %>
+        <div class="field">
+          <%= f.check_box :remember_me %>
+          <%= f.label :remember_me %>
+        </div>
+      <% end %>
+      <div class="actions text-center">
+        <%= f.submit "ログイン", class: "btn btn-secondary btn-block" %>
+      </div>
+      <div>保護団体の方は<%= link_to 'こちら', new_group_session_path %>からログインをお願いいたします。</div>
+    <% end %>
   </div>
-
-  <div class="field mb-2">
-    <%= f.label :password, class: "fa fa-paw" %><br />
-    <%= f.password_field :password, autocomplete: "current-password", class: "form-control" %>
-  </div>
-
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
-    </div>
-  <% end %>
-
-  <div class="actions text-center">
-    <%= f.submit "ログイン", class: "btn btn-secondary btn-block" %>
-  </div>
-<% end %>
-  </div>
-
 </div>

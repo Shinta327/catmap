@@ -1,51 +1,55 @@
-<h2>Sign up</h2>
-
-<%= form_with model: @group, url: group_registration_path, id: 'new_group', class: 'new_group', local: true do |f| %>
-  <%= render "groups/shared/error_messages", resource: resource %>
-
-  <div class="field">
-    <%= f.label :name, '名前' %></br>
-    <%= f.text_field :name, autofocus: true %>
+<div class="container-fluid">
+  <div class="row justify-content-center align-items-center" style="height: calc(100vh - 76px);">
+     <%= form_with model: @group, url: group_registration_path, class: "form-signup", local: true do |f| %>
+      <div class="field mb-4 text-center">
+        <%= image_tag 'logo.png', :size => '100x100' %>
+      </div>
+      <div class="field mb-2">
+        <p class="fas fa-paw">名前</p>
+        <%= f.text_field :name, autofocus: true, class: "form-control" %>
+        <%= render "groups/shared/error_messages", resource: resource, attribute: :name %>
+      </div>
+      <div class="field mb-2">
+        <p class="fas fa-paw">メールアドレス</p>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
+        <%= render "groups/shared/error_messages", resource: resource, attribute: :email %>
+      </div>
+      <div class="field mb-2">
+        <p class="fas fa-paw">郵便番号（ハイフンなし）</p>
+        <%= f.text_field :postal_code, class: "form-control" %>
+        <%= render "groups/shared/error_messages", resource: resource, attribute: :postal_code %>
+      </div>
+      <div class="field mb-2">
+        <p class="fas fa-paw">住所</p>
+        <%= f.text_area :address, class: "form-control" %>
+        <%= render "groups/shared/error_messages", resource: resource, attribute: :address %>
+      </div>
+      <div class="field mb-2">
+        <p class="fas fa-paw">パスワード</p>
+        <%= f.password_field :password, autocomplete: "current-password", class: "form-control" %>
+        <%= render "groups/shared/error_messages", resource: resource, attribute: :password %>
+      </div>
+      <div class="field mb-2">
+        <p class="fas fa-paw">サイトurl</p>
+        <%= f.text_field :url, class: "form-control" %>
+        <%= render "groups/shared/error_messages", resource: resource, attribute: :url %>
+      </div>
+      <div class="field">
+        <p class="fas fa-paw">団体紹介</p>
+        <%= f.text_area :explanation, class: "form-control" %>
+        <%= render "groups/shared/error_messages", resource: resource, attribute: :explanation %>
+      </div>
+      <% if devise_mapping.rememberable? %>
+        <div class="field">
+          <%= f.check_box :remember_me %>
+          <%= f.label :remember_me %>
+        </div>
+      <% end %>
+      <div class="actions text-center mb-5">
+        <%= f.submit "登録", class: "btn btn-secondary btn-block" %>
+      </div>
+    <% end %>
   </div>
+</div>
 
-  <div class="field">
-    <%= f.label :email, 'メールアドレス' %><br />
-    <%= f.email_field :email, autocomplete: "email" %>
-  </div>
 
-  <div class="field">
-    <%= f.label :postal_code, '郵便番号（ハイフンなし）' %></br>
-    <%= f.text_field :postal_code %>
-  </div>
-
-  <div class="field">
-    <%= f.label :address, '住所' %></br>
-    <%= f.text_area :address %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password, 'パスワード（半角英数字６文字以上）' %></br>
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation, 'パスワード（確認用）' %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :url, 'サイトURL' %></br>
-    <%= f.text_field :url %>
-  </div>
-
-  <div class="field">
-    <%= f.label :explanation, '団体紹介' %></br>
-    <%= f.text_area :explanation %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
-
-<% render "residents/shared/links" %>
