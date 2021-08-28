@@ -3,7 +3,12 @@
     <div>
       <% @notices.each do |notice| %>
         <%= link_to notice_path(notice), method: :patch, local:true do %>
-          <div><%= notice.group_send.name %>様からコメントがあります。</div>
+          <div class="py-3 border-bottom">
+            <div class="text-left">
+              <span class="text-left"><%= notice.group_send.name %>様からコメントがあります。</span>
+              <span class="float-right"><%= notice.created_at.to_s(:datetime) %></span>
+            </div>
+          </div>
         <% end %>
       <% end %>
     </div>
@@ -11,7 +16,12 @@
     <div>
       <% @notices.each do |notice| %>
         <%= link_to notice_path(notice), method: :patch, local:true do %>
-          <div><%= notice.resident_send.name %>様からコメントがあります。</div>
+          <div class="py-3 border-bottom">
+            <div class="text-left">
+              <span class="text-left"><%= notice.resident_send.name %>様からコメントがあります。</span>
+              <span class="float-right"><%= notice.created_at.to_s(:datetime) %></span>
+            </div>
+          </div>
         <% end %>
       <% end %>
     </div>

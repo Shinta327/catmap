@@ -20,5 +20,8 @@ module Catmap
     config.i18n.default_locale = :ja
     # 以下の記述を追記する(設定必須)、config/locale以下のファイルの全てが読み込まれるように設定
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}').to_s]
+
+    # タイムゾーンを日本時間に変更
+    config.time_zone = 'Tokyo'
   end
 end
