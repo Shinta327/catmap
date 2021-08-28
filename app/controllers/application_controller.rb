@@ -5,6 +5,11 @@ class ApplicationController < ActionController::Base
   # コメントの通知を取得するためのメソッド（全てのビューでしようするため）
   before_action :notice_index
 
+  # ログイン後の遷移先
+  def after_sign_in_path_for(resource)
+    cats_path
+  end
+
   protected
 
   def configure_permitted_parameters
