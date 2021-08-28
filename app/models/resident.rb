@@ -1,6 +1,6 @@
 class Resident < ApplicationRecord
   # アソシエーション
-  has_many :cats
+  has_many :cats, dependent: :destroy
   has_many :comments, dependent: :destroy
   # 通知機能用のアソシエーション
   # 自分からの通知
