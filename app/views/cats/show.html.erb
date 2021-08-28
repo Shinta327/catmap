@@ -5,11 +5,11 @@
         <div class="col-5 border-right">
           <%= attachment_image_tag @cat, :image, format: 'jpeg', fallback: "no_image.jpg", class: "cat-detail_image" %>
         </div>
-        <div class="col-7">
+        <div class="col-7 overflow-auto" style="height: 100%;">
           <div>
             <h4 class="fas fa-paw text-black-50">依頼詳細</h4>
           </div>
-          <div class="pt-3 overflow-auto">
+          <div class="pt-3">
             <div>
               <!--入力時の改行、空白をそのまま表示する-->
             <%= safe_join(@cat.detail.split("\n"),tag(:br)) %>
@@ -54,18 +54,18 @@
             <% end %>
           </div>
         </div>
-        <div class="col-7">
+        <div class="col-7 overflow-auto" style="height: 100%;">
           <div>
             <h4 class="fas fa-paw text-black-50">対応詳細</h4>
           </div>
-          <div class="pt-3 overflow-auto">
+          <div class="pt-3">
             <div>
               <% if @status != 2 %>
                 <p>対応詳細はありません</p>
               <% else %>
-                <%= @cat.handle.detail %>
-              </div>
-            <% end %>
+                <%= safe_join(@cat.handle.detail.split("\n"),tag(:br)) %>
+              <% end %>
+            </div>
           </div>
         </div>
       </div>
