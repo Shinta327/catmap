@@ -15,6 +15,88 @@
  */
 
 // bootstrapとjabascriptの読み込み
-@import "bootstrap";
-@import 'font-awesome-sprockets';
-@import 'font-awesome';
+@import"bootstrap";
+@import'font-awesome-sprockets';
+@import'font-awesome';
+
+// ヘッダーの文字サイズ
+.nav-item{
+  font-size:20px;
+}
+
+// 大画面での地図の高さの調整（76pxはヘッダーの高さ）
+#index-map{
+  height: calc(100vh - 76px);
+}
+
+// 投稿詳細画面のタブコンテンツの大きさ
+#nav-map,
+#nav-comment{
+  height: 65vh;
+}
+
+// コメント一覧の高さ（投稿フォームを引いた値）
+#comment{
+  height: calc(65vh - 62px);
+}
+
+//　投稿詳細画面左側の上下の高さ
+.cat-detail{
+  height: 32vh;
+}
+
+// 投稿詳細画面の画像の大きさの固定
+.cat-detail_image{
+  width: 15vw;
+  height: 32vh;
+}
+
+// ユーザー詳細画面でのサイドバーの高さの調整、固定
+.sidebar{
+  height: calc(100vh - 76px);
+}
+
+// indexにマウスが乗ると色が変わる
+.card:hover{
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+// 保護団体一覧でマウスが乗ると色が変わる
+.index-card:hover{
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+//　保護団体一覧画面のロゴの大きさの調整
+.index-logo{
+  font-size: 80px;
+}
+
+// エラー時にフォームを赤く囲う
+.field_with_errors {
+  input, textarea {
+    @extend .is-invalid;
+  }
+}
+
+// 登録画面のformの横幅
+.form-signup,
+.form-signin{
+  width: 30%;
+}
+
+// topページの画像
+.top-image{
+  height: 70vh;
+  width: 110vh;
+  background-image: image-url('cat.jpeg');
+  background-size: cover;
+}
+
+// 写真のテキスト
+.top-image_text-box{
+  height: 40%;
+  width: 40%;
+  background-color:rgba(255,255,255,0.5);
+  margin-left: 20px;
+  margin-top: 20px;
+}

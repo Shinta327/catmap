@@ -1,10 +1,16 @@
 class GroupsController < ApplicationController
+  # コメントの通知を取得するためのメソッド（全てのビューで使用するため）
+  before_action :notice_index
+  # ログイン前のアクション制限（一覧は制限なし）
+  before_action :authenticate_group!, except: [:index]
+
   def index
     @groups = Group.where(withdrawal: false)
     @cats = Cat.all
   end
 
   def show
+    @cats = Cat.joins(:handle).where("handles.group_id LIKE ?", "#{current_group.id}")
   end
 
   def edit
@@ -12,9 +18,12 @@ class GroupsController < ApplicationController
   end
 
   def update
-    group = current_group
-    group.update(group_params)
-    redirect_to group_path(current_group)
+    @group = current_group
+    if  @group.update(group_params)
+      redirect_to group_path(current_group)
+    else
+      render :edit
+    end
   end
 
   def withdrawal

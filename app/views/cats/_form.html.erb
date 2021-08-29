@@ -1,29 +1,61 @@
-<p>新規投稿</p>
-<!-- 地名入力用のinputを追加 -->
-<input id="address" type="textbox" value="住所">
-<!-- buttonをクリックしたらcodeAddressを実行　-->
-<input type="button" value="Encode" onclick="codeAddress()">
-
-
-<p>野良猫を発見した場所をクリックしてください</p>
-<%= form_with model: cat, local:true do |f| %>
-<div>
-  <!--scriptのdocument.getElementByIdで設定したlatitudeをform_withのformに組み込む-->
-  <%= f.label :latitude, '緯度'%>
-  <%= f.text_field :latitude %>
+<form class="mt-3">
+  <div class="row">
+    <div class="col-9">
+      <!-- 地名入力用のinputを追加 -->
+      <input id="address" type="textbox" class="form-control" placeholder="地名検索">
+    </div>
+    <div class="col-3">
+      <!-- buttonをクリックしたらcodeAddressを実行　-->
+      <button type="submit" value="Encode" onclick="codeAddress()" class="btn btn-secondary">検索</button>
+    </div>
+  </div>
+</form>
+<div class="my-4">
+  <%= form_with model: cat, local:true do |f| %>
+    <p class="fas fa-paw">野良猫の場所をクリックしてください</p>
+    <div>
+      <P class="fas fa-map-marker-alt">緯度</P>
+    </div>
+    <div>
+      <!--scriptのdocument.getElementByIdで設定したlatitudeをform_withのformに組み込む-->
+      <%= f.text_field :latitude, class: "form-control" %>
+      <%= render "layouts/error_messages", model: cat, attribute: :latitude %>
+    </div>
+    <div class="mt-4">
+      <div>
+        <p class="fas fa-map-marker-alt">経度</p>
+      </div>
+      <div>
+        <!--scriptのdocument.getElementByIdで設定したlongitudeをform_withのformに組み込む-->
+        <%= f.text_field :longitude, class: "form-control" %>
+        <%= render "layouts/error_messages", model: cat, attribute: :longitude %>
+      </div>
+    </div>
+    <div class="mt-4">
+      <div>
+        <p class="fas fa-paw">詳細</p>
+      </div>
+      <div>
+        <%= f.text_area :detail, rows: 5, class: "form-control" %>
+        <%= render "layouts/error_messages", model: cat, attribute: :detail %></br>
+      </div>
+      <p class="fas fa-paw">テンプレート</p>
+      <div class="border p-2 rounded">
+        猫の特徴：</br>
+        発見場所：</br>
+        対応して欲しいこと：</br>
+        保護の意思：</br>
+        詳細：</br>
+      </div>
+    </div>
+    <div class="mt-4">
+      <p class="fas fa-paw">猫の写真があれば投稿をお願いします</p>
+      <div>
+        <%= f.attachment_field :image %>
+      </div>
+    </div>
+    <div class="mt-4 text-center">
+      <%= f.submit class: "btn btn-secondary" %>
+    </div>
+  <% end %>
 </div>
-<div>
-   <!--scriptのdocument.getElementByIdで設定したlongitudeをform_withのformに組み込む-->
-  <%= f.label :longitude, '経度' %>
-  <%= f.text_field :longitude %>
-</div>
-<div>
-  <%= f.attachment_field :image %>
-  <p>猫の写真があれば投稿をお願いします</p>
-</div>
-<div>
-  <p>詳細</p>
-  <%= f.text_area :detail %></br>
-</div>
-<%= f.submit %>
-<% end %>

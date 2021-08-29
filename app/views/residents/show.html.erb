@@ -1,26 +1,36 @@
-<h1>ここは住民側詳細画面です</h1>
-
-<div class="show">
-  <table class="table">
-    <tbody>
-      <tr>
-        <th>名前</th>
-        <td><%= current_resident.name %></td>
-      </tr>
-      <tr>
-        <th>メールアドレス</th>
-        <td><%= current_resident.email %></td>
-      </tr>
-      <tr>
-        <th>郵便番号</th>
-        <td><%= current_resident.postal_code %></td>
-      </tr>
-      <tr>
-        <th>住所</th>
-        <td><%= current_resident.address %></td>
-      </tr>
-    </tbody>
-  </table>
+<div class="col-3 bg-light sidebar overflow-auto">
+  <%= render "/cats/sideindex/", cats: @cats %>
 </div>
 
-<div><%= link_to '編集画面', edit_resident_path %></div>
+<div class="show col-9">
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-10 offset-md-1">
+        <h1 class="fas fa-address-card"></h1>
+        <table class="table mt-5">
+          <tbody>
+            <tr>
+              <th>名前</th>
+              <td><%= current_resident.name %></td>
+            </tr>
+            <tr>
+              <th>メールアドレス</th>
+              <td><%= current_resident.email %></td>
+            </tr>
+            <tr>
+              <th>郵便番号</th>
+              <td>〒<%= current_resident.postal_code %></td>
+            </tr>
+            <tr>
+              <th>住所</th>
+              <td><%= current_resident.address %></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="text-right">
+          <%= link_to '編集', edit_resident_path, class: "btn btn-success" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

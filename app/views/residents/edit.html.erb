@@ -1,31 +1,35 @@
-<h1>ここは住民側情報編集ページです</h1>
-<h2>Sign up</h2>
-
-<%= form_with model: @resident, url: resident_path, local: true do |f| %>
-
-  <div class="field">
-    <%= f.label :name, '名前' %></br>
-    <%= f.text_field :name, autofocus: true %>
+<div class="container-fluid">
+  <div class="row justify-content-center align-items-center" style="height: calc(100vh - 76px);">
+     <%= form_with model: @resident, url: resident_path, class: "form-signup", local: true do |f| %>
+      <div class="field mb-4 text-center">
+        <%= image_tag 'logo.png', :size => '100x100' %>
+      </div>
+      <div class="field mb-2">
+        <p class="fas fa-paw">名前</p>
+        <%= f.text_field :name, autofocus: true, class: "form-control" %>
+        <%= render "/layouts/error_messages", model: @resident, attribute: :name %>
+      </div>
+      <div class="field mb-2">
+        <p class="fas fa-paw">メールアドレス</p>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
+        <%= render "/layouts/error_messages", model: @resident, attribute: :email %>
+      </div>
+      <div class="field mb-2">
+        <p class="fas fa-paw">郵便番号（ハイフンなし）</p>
+        <%= f.text_field :postal_code, class: "form-control" %>
+        <%= render "/layouts/error_messages", model: @resident, attribute: :postal_code %>
+      </div>
+      <div class="field mb-2">
+        <p class="fas fa-paw">住所</p>
+        <%= f.text_area :address, class: "form-control" %>
+        <%= render "/layouts/error_messages", model: @resident, attribute: :address %>
+      </div>
+      <div class="actions text-center">
+        <%= f.submit "編集", class: "btn btn-secondary btn-block" %>
+      </div>
+      <div class="text-right mt-2">
+        <%= link_to '退会', resident_withdrawal_path, method: :patch, "data-confirm"=>"本当に退会しますか？" %>
+        </div>
+    <% end %>
   </div>
-
-  <div class="field">
-    <%= f.label :email, 'メールアドレス' %><br />
-    <%= f.email_field :email, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :postal_code, '郵便番号（ハイフンなし）' %></br>
-    <%= f.text_field :postal_code %>
-  </div>
-
-  <div class="field">
-    <%= f.label :address, '住所' %></br>
-    <%= f.text_area :address %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
-
-<div><%= link_to '退会', resident_withdrawal_path, method: :patch, "data-confirm"=>"本当に退会しますか？" %></div>
+</div>

@@ -1,15 +1,29 @@
-<div>
-  <% cats.each do |cat| %>
-    <div>
-      <%= link_to cat_path(cat.id) do %>
-        <%= attachment_image_tag cat, :image, :fill, 60, 60, format: 'jpeg', fallback: "no_image.jpg", size: '60x60' %>
-        <%= cat.resident.name %>
-        <%= cat.detail %>
+<div class="container-fluid">
+  <div class="row">
+    <% cats.reverse_each do |cat| %>
+      <%= link_to cat_path(cat), class: "text-decoration-none text-reset" do %>
+        <div class="card" style="height: 23vh;">
+          <div class="row no-gutters card-body overflow-auto">
+            <div class="col-4">
+                <%= attachment_image_tag cat, :image, format: 'jpeg', fallback: "no_image.jpg", style: "height: 85%; width: 100%;" %>
+            </div>
+            <div class="col-8 pl-2 text-black-50">
+              <div class="mb-2">
+                <p class="card-text fas fa-user">&nbsp;<%= cat.resident.name %></p>
+              </div>
+              <div class="mb-2">
+                <p class="card-text fas fa-paw">&nbsp;<%= cat.handle.status %></p>
+              </div>
+              <div class="mb-2">
+                <p class="card-text fas fa-map-marker-alt">&nbsp;<%= cat.address.delete("日本、") %></p>
+              </div>
+              <div class="text-right">
+                <p class="card-text"><%= cat.created_at.to_s(:datetime) %></p>
+              </div>
+            </div>
+          </div>
+        </div>
       <% end %>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
 </div>
-
-<% if resident_signed_in? %>
-  <%= link_to '投稿する', new_cat_path %>
-<% end %>

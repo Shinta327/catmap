@@ -1,19 +1,16 @@
-<h1>投稿一覧画面</h1>
-
-<div id='map'></div>
-
-<style>
-#map{
-  height: 400px;
-  width: 600px;
-}
-</style>
- 
+<div class="col-3 bg-light sidebar position-relative">
+  <div style="position: sticky;">
+    <%= render "/searchs/address_form" %>
+  </div>
+  <div class="overflow-auto" style="height: calc(100vh - 76px - 178px)">
+    <%= render "/cats/sideindex/", cats: @cats %>
+  </div>
+</div>
+<div class="col-9" id="index-map"></div>
 <script>
   let map
   let geocoder
-
-
+  let infoWindow = [];
     // 現在地取得処理
     function initMap() {
       // Geolocation APIに対応している
@@ -33,7 +30,7 @@
             geocoder = new google.maps.Geocoder()
             // マップオブジェクト作成
             map = new google.maps.Map(
-              document.getElementById("map"), // マップを表示する要素
+              document.getElementById("index-map"), // マップを表示する要素
               mapOptions         // マップオプション
             );
             //　マップにマーカーを表示する
@@ -47,7 +44,20 @@
                 position: markerLatLng, // マーカーを立てる位置を指定
                 map: map // マーカーを立てる地図を指定
               });
-            }
+
+              // マーカに吹き出しを立てる
+              infoWindow[i] = new google.maps.InfoWindow({
+                content:`<div><a href='/cats/${ markerData[i]['id'] }'><div>${ markerData[i]['address']}</div><div>${ gon.handles[i]['status']}</div></a></div>`
+              });
+
+              markerEvent(i); // マーカにクリックイベントを追加
+            };
+            // クリックイベントの定義
+            function markerEvent(i){
+              marker[i].addListener('click', function(){
+                infoWindow[i].open(map, marker[i]);
+              });
+            };
           },
           // 取得失敗した場合
           function(error) {
@@ -74,6 +84,3 @@
       }
     }
   </script>
-
-<%= render "/searchs/address_form" %>
-<%= render "/cats/sideindex/", cats: @cats %>

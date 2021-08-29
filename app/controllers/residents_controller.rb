@@ -1,5 +1,9 @@
 class ResidentsController < ApplicationController
+  # ログイン前のアクション制限
+  before_action :authenticate_resident!
+
   def show
+    @cats = Cat.where(resident_id: current_resident.id)
   end
 
   def edit
@@ -7,9 +11,12 @@ class ResidentsController < ApplicationController
   end
 
   def update
-    resident = current_resident
-    resident.update(resident_params)
-    redirect_to resident_path(current_resident)
+    @resident = current_resident
+    if @resident.update(resident_params)
+      redirect_to resident_path(current_resident)
+    else
+      render :edit
+    end
   end
 
   # 退会機能

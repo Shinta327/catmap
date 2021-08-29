@@ -1,0 +1,53 @@
+<div class="container">
+  <% comments.reverse_each do |comment| %>
+    <% if comment.resident_id.present? %>
+      <div class="row resident-comment align-items-center border-bottom">
+      <div class="col-2 text-center pt-2">
+        <h2 class="fas fa-user text-black-50"></h2>
+      </div>
+      <div class="col-6 comment-detail text-break p-2">
+      <div>
+        <%= comment.comment %>
+      </div>
+      <div class="text-left text-black-50">
+        <span><%= comment.created_at.to_s(:datetime) %></span>
+      </div>
+      </div>
+      <div class="col-2 offset-md-2">
+          <% if resident_signed_in? %>
+            <% if comment.resident_id == current_resident.id %>
+              <%= link_to '削除', cat_comment_path(cat, comment), method: :delete, remote:true, class: "btn btn-sm btn-danger float-right" %>
+            <% end %>
+          <% elsif group_signed_in? %>
+            <% if comment.group_id == current_group.id %>
+              <%= link_to '削除', cat_comment_path(cat, comment), method: :delete, remote:true, class: "btn btn-sm btn-danger float-left" %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    <% else %>
+      <div class="row group-comment align-items-center border-bottom">
+        <div class="col-2">
+          <% if resident_signed_in? %>
+            <% if comment.resident_id == current_resident.id %>
+              <%= link_to '削除', cat_comment_path(cat, comment), method: :delete, remote:true, class: "btn btn-sm btn-danger float-right" %>
+            <% end %>
+          <% elsif group_signed_in? %>
+            <% if comment.group_id == current_group.id %>
+              <%= link_to '削除', cat_comment_path(cat, comment), method: :delete, remote:true, class: "btn btn-sm btn-danger float-left" %>
+            <% end %>
+          <% end %>
+        </div>
+        <div class="col-6 offset-md-2 comment-detail text-break p-2 text-left">
+          <%= comment.comment %>
+          <div class="text-right text-black-50">
+            <span><%= comment.created_at.to_s(:datetime) %></span>
+          </div>
+        </div>
+        <div class="col-2 text-center pt-2">
+          <h2 class="fas fa-users text-black-50"></h2>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>

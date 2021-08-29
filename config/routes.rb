@@ -29,7 +29,7 @@ Rails.application.routes.draw do
   patch 'handles/:id/failed' => 'handles#failed', as: 'handle_failed'
 
   # 通知機能ためのルーティング
-  resources :notices, only: [:index]
+  resources :notices, only: [:index, :update]
 
   # 検索のためのルーティング
   get '/searchs/cats' => 'searchs#cats', as: 'search_cats'
