@@ -1,6 +1,9 @@
 class ResidentsController < ApplicationController
   # ログイン前のアクション制限
   before_action :authenticate_resident!
+  
+  # コメントの通知を取得するためのメソッド（全てのビューで使用するため）
+  before_action :notice_index
 
   def show
     @cats = Cat.where(resident_id: current_resident.id)
